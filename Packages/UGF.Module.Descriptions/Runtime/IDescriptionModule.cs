@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UGF.Application.Runtime;
-using UGF.Coroutines.Runtime;
 using UGF.Description.Runtime;
 
 namespace UGF.Module.Descriptions.Runtime
@@ -15,7 +15,9 @@ namespace UGF.Module.Descriptions.Runtime
         void Remove(string name);
         T GetDescription<T>(string name) where T : IDescription;
         bool TryGetDescription<T>(string name, out T description) where T : IDescription;
-        ICoroutine<IDescription> LoadAsync(string assetName, Type assetType);
-        ICoroutine<T> LoadAsync<T>(string assetName) where T : IDescription;
+        T Load<T>(string assetName) where T : IDescription;
+        IDescription Load(string assetName, Type assetType);
+        Task<T> LoadAsync<T>(string assetName) where T : IDescription;
+        Task<IDescription> LoadAsync(string assetName, Type assetType);
     }
 }

@@ -1,14 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using UGF.Application.Runtime;
-using UGF.Coroutines.Runtime;
 using UGF.Description.Runtime;
 using UGF.Logs.Runtime;
 using UGF.Module.Assets.Runtime;
-using UGF.Module.Descriptions.Runtime.Coroutines;
 using UGF.Module.Serialize.Runtime;
+using UGF.Serialize.Runtime;
+using UnityEngine;
 
 namespace UGF.Module.Descriptions.Runtime
 {
@@ -29,18 +29,16 @@ namespace UGF.Module.Descriptions.Runtime
             Descriptions = new ReadOnlyDictionary<string, IDescription>(m_descriptions);
         }
 
-        protected override IEnumerator OnInitializeAsync()
+        public override async Task InitializeAsync()
         {
             IReadOnlyList<IDescriptionAssetInfo> assetInfos = Description.AssetInfos;
 
             for (int i = 0; i < assetInfos.Count; i++)
             {
                 IDescriptionAssetInfo assetInfo = assetInfos[i];
-                ICoroutine<IDescription> coroutine = LoadAsync(assetInfo.AssetName, typeof(IDescription));
+                IDescription description = await LoadAsync(assetInfo.AssetName, typeof(IDescription));
 
-                yield return coroutine;
-
-                Add(assetInfo.RegisterName, coroutine.Result);
+                Add(assetInfo.RegisterName, description);
 
                 Log.Debug($"Description loaded: registerName:'{assetInfo.RegisterName}', assetName:'{assetInfo.AssetName}'.");
             }
@@ -90,19 +88,64 @@ namespace UGF.Module.Descriptions.Runtime
             return false;
         }
 
-        public ICoroutine<IDescription> LoadAsync(string assetName, Type assetType)
+        public T Load<T>(string assetName) where T : IDescription
         {
-            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
-            if (assetType == null) throw new ArgumentNullException(nameof(assetType));
+            var asset = AssetsModule.Load<object>(assetName);
+            var description = ExtractDescription<T>(asset, typeof(T));
 
-            return new DescriptionLoadCoroutine(AssetsModule, SerializeModule, assetName, assetType);
+            AssetsModule.Release(asset);
+
+            return description;
         }
 
-        public ICoroutine<T> LoadAsync<T>(string assetName) where T : IDescription
+        public IDescription Load(string assetName, Type assetType)
         {
-            if (string.IsNullOrEmpty(assetName)) throw new ArgumentException("Value cannot be null or empty.", nameof(assetName));
+            var asset = AssetsModule.Load<object>(assetName);
+            var description = ExtractDescription<IDescription>(asset, assetType);
 
-            return new DescriptionLoadCoroutine<T>(AssetsModule, SerializeModule, assetName);
+            AssetsModule.Release(asset);
+
+            return description;
+        }
+
+        public async Task<T> LoadAsync<T>(string assetName) where T : IDescription
+        {
+            object asset = await AssetsModule.LoadAsync<object>(assetName);
+            var description = ExtractDescription<T>(asset, typeof(T));
+
+            AssetsModule.Release(asset);
+
+            return description;
+        }
+
+        public async Task<IDescription> LoadAsync(string assetName, Type assetType)
+        {
+            object asset = await AssetsModule.LoadAsync<object>(assetName);
+            var description = ExtractDescription<IDescription>(asset, assetType);
+
+            AssetsModule.Release(asset);
+
+            return description;
+        }
+
+        private T ExtractDescription<T>(object asset, Type assetType) where T : IDescription
+        {
+            switch (asset)
+            {
+                case DescriptionAsset descriptionAsset:
+                {
+                    return descriptionAsset.GetDescription<T>();
+                }
+                case TextAsset textAsset:
+                {
+                    ISerializer<byte[]> serializer = SerializeModule.GetDefaultBytesSerializer();
+
+                    return typeof(T) == typeof(IDescription)
+                        ? (T)serializer.Deserialize(assetType, textAsset.bytes)
+                        : serializer.Deserialize<T>(textAsset.bytes);
+                }
+                default: throw new ArgumentException($"Unexpected asset type: '{asset}'.", nameof(asset));
+            }
         }
     }
 }
