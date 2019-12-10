@@ -26,6 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 0.3.0-preview - 2019-12-10
+- [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.2.0-preview...0.3.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/3?closed=1)
+
+### Changed
+- Package dependencies:
+    - `com.ugf.module.assets`: from `0.2.0-preview` to `0.3.0-preview`.
+    - `com.ugf.module.serialize`: from `0.1.0-preview` to `0.3.0-preview`.
+- Update `UGF.Application` package.
+
 ## 0.2.0-preview - 2019-11-19
 - [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.1.0-preview...0.2.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/2?closed=1)
