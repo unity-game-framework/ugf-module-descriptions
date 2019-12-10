@@ -31,19 +31,18 @@ namespace UGF.Module.Descriptions.Runtime
 
         public override async Task InitializeAsync()
         {
-            IReadOnlyList<IDescriptionAssetInfo> assetInfos = Description.AssetInfos;
+            IReadOnlyDictionary<string, string> assets = Description.Assets;
 
-            for (int i = 0; i < assetInfos.Count; i++)
+            foreach (KeyValuePair<string, string> pair in assets)
             {
-                IDescriptionAssetInfo assetInfo = assetInfos[i];
-                IDescription description = await LoadAsync(assetInfo.AssetName, typeof(IDescription));
+                IDescription description = await LoadAsync(pair.Value, typeof(IDescription));
 
-                Add(assetInfo.RegisterName, description);
+                Add(pair.Key, description);
 
-                Log.Debug($"Description loaded: registerName:'{assetInfo.RegisterName}', assetName:'{assetInfo.AssetName}'.");
+                Log.Debug($"Description loaded: name:'{pair.Key}', assetName:'{pair.Value}'.");
             }
 
-            Log.Debug($"Descriptions total: count:'{assetInfos.Count}'.");
+            Log.Debug($"Descriptions total: count:'{assets.Count.ToString()}'.");
         }
 
         public void Add(string name, IDescription description)
