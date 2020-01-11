@@ -26,6 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 0.4.0-preview - 2020-01-11
+- [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.3.0-preview...0.4.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/4?closed=1)
+
+### Changed
+- Package dependencies:
+    - `com.ugf.logs`: from `1.1.0` to `2.0.0`.
+- Descriptions loading and extracting logic.
+
 ## 0.3.0-preview - 2019-12-10
 - [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.2.0-preview...0.3.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/3?closed=1)

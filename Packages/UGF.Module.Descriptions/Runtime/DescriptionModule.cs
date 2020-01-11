@@ -89,18 +89,13 @@ namespace UGF.Module.Descriptions.Runtime
 
         public T Load<T>(string assetName) where T : IDescription
         {
-            var asset = AssetsModule.Load<object>(assetName);
-            var description = ExtractDescription<T>(asset, typeof(T));
-
-            AssetsModule.Release(asset);
-
-            return description;
+            return (T)Load(assetName, typeof(T));
         }
 
         public IDescription Load(string assetName, Type assetType)
         {
             var asset = AssetsModule.Load<object>(assetName);
-            var description = ExtractDescription<IDescription>(asset, assetType);
+            IDescription description = ExtractDescription(asset, assetType);
 
             AssetsModule.Release(asset);
 
@@ -109,39 +104,32 @@ namespace UGF.Module.Descriptions.Runtime
 
         public async Task<T> LoadAsync<T>(string assetName) where T : IDescription
         {
-            object asset = await AssetsModule.LoadAsync<object>(assetName);
-            var description = ExtractDescription<T>(asset, typeof(T));
-
-            AssetsModule.Release(asset);
-
-            return description;
+            return (T)await LoadAsync(assetName, typeof(T));
         }
 
         public async Task<IDescription> LoadAsync(string assetName, Type assetType)
         {
-            object asset = await AssetsModule.LoadAsync<object>(assetName);
-            var description = ExtractDescription<IDescription>(asset, assetType);
+            var asset = await AssetsModule.LoadAsync<object>(assetName);
+            IDescription description = ExtractDescription(asset, assetType);
 
             AssetsModule.Release(asset);
 
             return description;
         }
 
-        private T ExtractDescription<T>(object asset, Type assetType) where T : IDescription
+        private IDescription ExtractDescription(object asset, Type assetType)
         {
             switch (asset)
             {
                 case DescriptionAsset descriptionAsset:
                 {
-                    return descriptionAsset.GetDescription<T>();
+                    return descriptionAsset.GetDescription();
                 }
                 case TextAsset textAsset:
                 {
-                    ISerializer<byte[]> serializer = SerializeModule.GetDefaultBytesSerializer();
+                    ISerializer<string> serializer = SerializeModule.GetDefaultTextSerializer();
 
-                    return typeof(T) == typeof(IDescription)
-                        ? (T)serializer.Deserialize(assetType, textAsset.bytes)
-                        : serializer.Deserialize<T>(textAsset.bytes);
+                    return (IDescription)serializer.Deserialize(assetType, textAsset.text);
                 }
                 default: throw new ArgumentException($"Unexpected asset type: '{asset}'.", nameof(asset));
             }
