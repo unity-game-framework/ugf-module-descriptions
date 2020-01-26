@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased - 2019-01-01
+## Unreleased - 2020-01-01
 - [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.0.0...0.0.0)
 - [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/0?closed=1)
 
@@ -25,6 +25,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 - Nothing.
+
+## 0.5.0-preview - 2020-01-26
+- [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.4.0-preview...0.5.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/5?closed=1)
+
+### Changed
+- Package dependencies:
+    - `com.ugf.application`: from `3.1.0-preview` to `4.0.0-preview`.
 
 ## 0.4.0-preview - 2020-01-11
 - [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.3.0-preview...0.4.0-preview)
