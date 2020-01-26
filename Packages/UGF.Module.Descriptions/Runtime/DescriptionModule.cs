@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public class DescriptionModule : ApplicationModuleBaseAsync, IDescriptionModule
+    public class DescriptionModule : ApplicationModuleBase, IDescriptionModule, IApplicationModuleAsync
     {
         public IAssetsModule AssetsModule { get; }
         public ISerializeModule SerializeModule { get; }
@@ -29,7 +29,7 @@ namespace UGF.Module.Descriptions.Runtime
             Descriptions = new ReadOnlyDictionary<string, IDescription>(m_descriptions);
         }
 
-        public override async Task InitializeAsync()
+        public async Task InitializeAsync()
         {
             IReadOnlyDictionary<string, string> assets = Description.Assets;
 
