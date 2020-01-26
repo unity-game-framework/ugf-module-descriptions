@@ -4,14 +4,16 @@ UGF.Module.Descriptions
 
 ## Info
 
-- **Version**: `0.4.0-preview`
+- **Version**: `0.5.0-preview`
 - **Unity Version**: `2019.3.0`
 - **API Compatibility Level**: `.NET Standard 2.0`
 
 ### Dependencies
 
+- [UGF.Application](https://github.com/unity-game-framework/ugf-application): `4.0.0-preview`
 - [UGF.Module.Assets](https://github.com/unity-game-framework/ugf-module-assets): `0.3.0-preview`
 - [UGF.Module.Serialize](https://github.com/unity-game-framework/ugf-module-serialize): `0.3.0-preview`
+- [UGF.Description](https://github.com/unity-game-framework/ugf-description): `1.0.1-preview`
 - [UGF.Logs](https://github.com/unity-game-framework/ugf-logs): `2.0.0`
 
 ### Changelog
