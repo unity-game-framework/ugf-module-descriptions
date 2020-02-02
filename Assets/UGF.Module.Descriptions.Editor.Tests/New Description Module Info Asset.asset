@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8bc0ceeb8d41c4ba0e565697d388d1, type: 3}
   m_Name: New Description Module Info Asset
   m_EditorClassIdentifier: 
-  m_assets: []
+  m_assets:
+  - 146b954d2be182246a2ca8ffa911926c
+  - 146b954d2be182246a2ca8ffa911926c

@@ -31,53 +31,52 @@ namespace UGF.Module.Descriptions.Runtime
 
         public async Task InitializeAsync()
         {
-            IReadOnlyDictionary<string, string> assets = Description.Assets;
+            IReadOnlyList<string> assets = Description.Assets;
 
-            foreach (KeyValuePair<string, string> pair in assets)
+            for (int i = 0; i < assets.Count; i++)
             {
-                IDescription description = await LoadAsync(pair.Value, typeof(IDescription));
+                string assetId = assets[i];
+                var description = await LoadAsync<IDescription>(assetId);
 
-                Add(pair.Key, description);
-
-                Log.Debug($"Description loaded: name:'{pair.Key}', assetName:'{pair.Value}'.");
+                Add(assetId, description);
             }
 
             Log.Debug($"Descriptions total: count:'{assets.Count.ToString()}'.");
         }
 
-        public void Add(string name, IDescription description)
+        public void Add(string id, IDescription description)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
             if (description == null) throw new ArgumentNullException(nameof(description));
-            if (m_descriptions.ContainsKey(name)) throw new ArgumentException($"A description with the specified name already registered: '{name}'.", nameof(name));
+            if (m_descriptions.ContainsKey(id)) throw new ArgumentException($"Description with the specified id already registered: '{id}'.", nameof(id));
 
-            m_descriptions.Add(name, description);
+            m_descriptions.Add(id, description);
         }
 
-        public void Remove(string name)
+        public void Remove(string id)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
 
-            m_descriptions.Remove(name);
+            m_descriptions.Remove(id);
         }
 
-        public T GetDescription<T>(string name) where T : IDescription
+        public T GetDescription<T>(string id) where T : IDescription
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
 
-            if (!TryGetDescription(name, out T description))
+            if (!TryGetDescription(id, out T description))
             {
-                throw new ArgumentException($"The description by the specified name not found: '{name}'.");
+                throw new ArgumentException($"Description by the specified id not found: '{id}'.");
             }
 
             return description;
         }
 
-        public bool TryGetDescription<T>(string name, out T description) where T : IDescription
+        public bool TryGetDescription<T>(string id, out T description) where T : IDescription
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException("Value cannot be null or empty.", nameof(name));
+            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
 
-            if (m_descriptions.TryGetValue(name, out IDescription value) && value is T cast)
+            if (m_descriptions.TryGetValue(id, out IDescription value) && value is T cast)
             {
                 description = cast;
                 return true;

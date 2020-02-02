@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UGF.Application.Runtime;
+using UGF.EditorTools.Runtime.IMGUI;
 using UGF.Module.Assets.Runtime;
 using UGF.Module.Serialize.Runtime;
 using UnityEngine;
@@ -10,32 +10,16 @@ namespace UGF.Module.Descriptions.Runtime
     [CreateAssetMenu(menuName = "UGF/Module.Descriptions/DescriptionModuleInfo", order = 2000)]
     public class DescriptionModuleInfoAsset : ApplicationModuleInfoAsset<IDescriptionModule>
     {
-        [SerializeField] private List<AssetInfo> m_assets = new List<AssetInfo>();
+        [SerializeField, AssetGuid] private List<string> m_assets = new List<string>();
 
-        public List<AssetInfo> Assets { get { return m_assets; } }
-
-        [Serializable]
-        public class AssetInfo
-        {
-            [SerializeField] private string m_name;
-            [SerializeField] private string m_assetName;
-
-            public string Name { get { return m_name; } set { m_name = value; } }
-            public string AssetName { get { return m_assetName; } set { m_assetName = value; } }
-        }
+        public List<string> Assets { get { return m_assets; } }
 
         public IDescriptionModuleDescription GetDescription()
         {
-            var description = new DescriptionModuleDescription();
-
-            for (int i = 0; i < m_assets.Count; i++)
+            return new DescriptionModuleDescription
             {
-                AssetInfo info = m_assets[i];
-
-                description.Assets.Add(info.Name, info.AssetName);
-            }
-
-            return description;
+                Assets = new List<string>(m_assets)
+            };
         }
 
         protected override IApplicationModule OnBuild(IApplication application)

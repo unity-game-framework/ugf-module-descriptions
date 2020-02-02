@@ -10,7 +10,6 @@ namespace UGF.Module.Descriptions.Editor
     internal class DescriptionModuleBuilderAssetEditor : ApplicationModuleInfoAssetEditor
     {
         private SerializedProperty m_script;
-        private readonly GUIContent[] m_labels = { new GUIContent("Name"), new GUIContent("Asset") };
         private ReorderableList m_list;
 
         private void OnEnable()
@@ -52,12 +51,11 @@ namespace UGF.Module.Descriptions.Editor
         private void OnDrawElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             SerializedProperty propertyElement = m_list.serializedProperty.GetArrayElementAtIndex(index);
-            SerializedProperty propertyRegisterName = propertyElement.FindPropertyRelative("m_name");
 
             rect.y += EditorGUIUtility.standardVerticalSpacing;
             rect.height = EditorGUIUtility.singleLineHeight;
 
-            EditorGUI.MultiPropertyField(rect, m_labels, propertyRegisterName);
+            EditorGUI.PropertyField(rect, propertyElement, GUIContent.none);
         }
 
         private float OnElementHeight(int index)
@@ -75,11 +73,8 @@ namespace UGF.Module.Descriptions.Editor
             propertyModules.InsertArrayElementAtIndex(propertyModules.arraySize);
 
             SerializedProperty propertyElement = propertyModules.GetArrayElementAtIndex(propertyModules.arraySize - 1);
-            SerializedProperty propertyRegisterName = propertyElement.FindPropertyRelative("m_name");
-            SerializedProperty propertyAssetName = propertyElement.FindPropertyRelative("m_assetName");
 
-            propertyRegisterName.stringValue = string.Empty;
-            propertyAssetName.stringValue = string.Empty;
+            propertyElement.stringValue = string.Empty;
 
             serializedObject.ApplyModifiedProperties();
         }
