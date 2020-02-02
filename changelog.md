@@ -26,6 +26,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 - Nothing.
 
+## 0.6.0-preview - 2020-02-02
+- [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.5.0-preview...0.6.0-preview)
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/6?closed=1)
+
+### Added
+- Package dependencies:
+    - `com.ugf.editortools`: `0.5.0-preview`.
+
+### Changed
+- Rework module to store and load description asset ids without names.
+
 ## 0.5.0-preview - 2020-01-26
 - [Commits](https://github.com/unity-game-framework/ugf-module-descriptions/compare/0.4.0-preview...0.5.0-preview)
 - [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/5?closed=1)
