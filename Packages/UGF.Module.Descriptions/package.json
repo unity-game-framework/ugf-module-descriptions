@@ -13,6 +13,7 @@
         "com.ugf.module.assets": "0.3.0-preview",
         "com.ugf.module.serialize": "0.3.0-preview",
         "com.ugf.description": "1.0.1-preview",
-        "com.ugf.logs": "2.0.0"
+        "com.ugf.logs": "2.0.0",
+        "com.ugf.editortools": "0.5.0-preview"
     }
 }
