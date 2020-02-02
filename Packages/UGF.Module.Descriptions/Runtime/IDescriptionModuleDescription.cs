@@ -4,6 +4,6 @@ namespace UGF.Module.Descriptions.Runtime
 {
     public interface IDescriptionModuleDescription
     {
-        IReadOnlyDictionary<string, string> Assets { get; }
+        IReadOnlyList<string> Assets { get; }
     }
 }
