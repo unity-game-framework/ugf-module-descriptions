@@ -1,5 +1,6 @@
 {
     "name": "UGF.Module.Descriptions.Editor",
+    "rootNamespace": "UGF.Module.Descriptions.Editor",
     "references": [
         "GUID:707f8c0cf560d6c45b8b0cd682bdd2c0",
         "GUID:0a8cfea8c226a8041bc7a5979811d462"
