@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
+using UGF.EditorTools.Runtime.Ids;
 
 namespace UGF.Module.Descriptions.Runtime
 {
     public interface IDescriptionModule : IApplicationModule
     {
-        IDescriptionModuleDescription Description { get; }
-        IReadOnlyDictionary<string, IDescription> Descriptions { get; }
+        new IDescriptionModuleDescription Description { get; }
 
-        void Add(string id, IDescription description);
-        void Remove(string id);
-        T GetDescription<T>(string id) where T : IDescription;
-        bool TryGetDescription<T>(string id, out T description) where T : IDescription;
-        T Load<T>(string assetName) where T : IDescription;
-        IDescription Load(string assetName, Type assetType);
-        Task<T> LoadAsync<T>(string assetName) where T : IDescription;
-        Task<IDescription> LoadAsync(string assetName, Type assetType);
+        T Get<T>(GlobalId id) where T : class, IDescription;
+        IDescription Get(GlobalId id);
+        bool TryGet<T>(GlobalId id, out T description) where T : class, IDescription;
+        bool TryGet(GlobalId id, out IDescription description);
     }
 }

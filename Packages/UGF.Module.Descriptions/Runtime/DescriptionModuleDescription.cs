@@ -1,11 +1,12 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UGF.Application.Runtime;
+using UGF.Description.Runtime;
+using UGF.EditorTools.Runtime.Ids;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public class DescriptionModuleDescription : IDescriptionModuleDescription
+    public class DescriptionModuleDescription : ApplicationModuleDescription, IDescriptionModuleDescription
     {
-        public List<string> Assets { get; set; } = new List<string>();
-
-        IReadOnlyList<string> IDescriptionModuleDescription.Assets { get { return Assets; } }
+        public Dictionary<GlobalId, IDescription> Descriptions { get; } = new Dictionary<GlobalId, IDescription>();
     }
 }

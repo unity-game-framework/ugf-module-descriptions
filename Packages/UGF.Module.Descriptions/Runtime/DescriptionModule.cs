@@ -1,84 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using System;
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
-using UGF.Logs.Runtime;
-using UGF.Module.Assets.Runtime;
-using UGF.Module.Serialize.Runtime;
-using UGF.Serialize.Runtime;
-using UnityEngine;
+using UGF.EditorTools.Runtime.Ids;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public class DescriptionModule : ApplicationModuleBase, IDescriptionModule, IApplicationModuleAsync
+    public class DescriptionModule : ApplicationModule<DescriptionModuleDescription>, IDescriptionModule
     {
-        public IAssetsModule AssetsModule { get; }
-        public ISerializeModule SerializeModule { get; }
-        public IDescriptionModuleDescription Description { get; }
-        public IReadOnlyDictionary<string, IDescription> Descriptions { get; }
+        IDescriptionModuleDescription IDescriptionModule.Description { get { return Description; } }
 
-        private readonly Dictionary<string, IDescription> m_descriptions = new Dictionary<string, IDescription>();
-
-        public DescriptionModule(IAssetsModule assetsModule, ISerializeModule serializeModule, IDescriptionModuleDescription description)
+        public DescriptionModule(DescriptionModuleDescription description, IApplication application) : base(description, application)
         {
-            AssetsModule = assetsModule ?? throw new ArgumentNullException(nameof(assetsModule));
-            SerializeModule = serializeModule ?? throw new ArgumentNullException(nameof(serializeModule));
-            Description = description ?? throw new ArgumentNullException(nameof(description));
-            Descriptions = new ReadOnlyDictionary<string, IDescription>(m_descriptions);
         }
 
-        public async Task InitializeAsync()
+        public T Get<T>(GlobalId id) where T : class, IDescription
         {
-            IReadOnlyList<string> assets = Description.Assets;
+            return (T)Get(id);
+        }
 
-            for (int i = 0; i < assets.Count; i++)
+        public IDescription Get(GlobalId id)
+        {
+            return TryGet(id, out IDescription description) ? description : throw new ArgumentException($"Description not found by the specified id: '{id}'.");
+        }
+
+        public bool TryGet<T>(GlobalId id, out T description) where T : class, IDescription
+        {
+            if (TryGet(id, out IDescription result))
             {
-                string assetId = assets[i];
-                var description = await LoadAsync<IDescription>(assetId);
-
-                Add(assetId, description);
-            }
-
-            Log.Debug($"Descriptions total: count:'{assets.Count.ToString()}'.");
-        }
-
-        public void Add(string id, IDescription description)
-        {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
-            if (description == null) throw new ArgumentNullException(nameof(description));
-            if (m_descriptions.ContainsKey(id)) throw new ArgumentException($"Description with the specified id already registered: '{id}'.", nameof(id));
-
-            m_descriptions.Add(id, description);
-        }
-
-        public void Remove(string id)
-        {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
-
-            m_descriptions.Remove(id);
-        }
-
-        public T GetDescription<T>(string id) where T : IDescription
-        {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
-
-            if (!TryGetDescription(id, out T description))
-            {
-                throw new ArgumentException($"Description by the specified id not found: '{id}'.");
-            }
-
-            return description;
-        }
-
-        public bool TryGetDescription<T>(string id, out T description) where T : IDescription
-        {
-            if (string.IsNullOrEmpty(id)) throw new ArgumentException("Value cannot be null or empty.", nameof(id));
-
-            if (m_descriptions.TryGetValue(id, out IDescription value) && value is T cast)
-            {
-                description = cast;
+                description = (T)result;
                 return true;
             }
 
@@ -86,52 +35,11 @@ namespace UGF.Module.Descriptions.Runtime
             return false;
         }
 
-        public T Load<T>(string assetName) where T : IDescription
+        public bool TryGet(GlobalId id, out IDescription description)
         {
-            return (T)Load(assetName, typeof(T));
-        }
+            if (!id.IsValid()) throw new ArgumentException("Value should be valid.", nameof(id));
 
-        public IDescription Load(string assetName, Type assetType)
-        {
-            var asset = AssetsModule.Load<object>(assetName);
-            IDescription description = ExtractDescription(asset, assetType);
-
-            AssetsModule.Release(asset);
-
-            return description;
-        }
-
-        public async Task<T> LoadAsync<T>(string assetName) where T : IDescription
-        {
-            return (T)await LoadAsync(assetName, typeof(T));
-        }
-
-        public async Task<IDescription> LoadAsync(string assetName, Type assetType)
-        {
-            var asset = await AssetsModule.LoadAsync<object>(assetName);
-            IDescription description = ExtractDescription(asset, assetType);
-
-            AssetsModule.Release(asset);
-
-            return description;
-        }
-
-        private IDescription ExtractDescription(object asset, Type assetType)
-        {
-            switch (asset)
-            {
-                case DescriptionAsset descriptionAsset:
-                {
-                    return descriptionAsset.GetDescription();
-                }
-                case TextAsset textAsset:
-                {
-                    ISerializer<string> serializer = SerializeModule.GetDefaultTextSerializer();
-
-                    return (IDescription)serializer.Deserialize(assetType, textAsset.text);
-                }
-                default: throw new ArgumentException($"Unexpected asset type: '{asset}'.", nameof(asset));
-            }
+            return Description.Descriptions.TryGetValue(id, out description);
         }
     }
 }

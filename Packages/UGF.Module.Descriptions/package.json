@@ -19,11 +19,7 @@
     "registry": "https://unitygameframework.jfrog.io/artifactory/api/npm/default"
   },
   "dependencies": {
-    "com.ugf.application": "4.0.0-preview",
-    "com.ugf.module.assets": "0.3.0-preview",
-    "com.ugf.module.serialize": "0.3.0-preview",
-    "com.ugf.description": "1.0.1-preview",
-    "com.ugf.logs": "2.0.0",
-    "com.ugf.editortools": "0.5.0-preview"
+    "com.ugf.application": "8.3.1",
+    "com.ugf.editortools": "2.13.0"
   }
 }
