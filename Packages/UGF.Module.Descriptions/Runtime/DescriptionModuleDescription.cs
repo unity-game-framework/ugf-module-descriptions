@@ -1,11 +1,8 @@
-using System.Collections.Generic;
+﻿using UGF.Application.Runtime;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public class DescriptionModuleDescription : IDescriptionModuleDescription
+    public class DescriptionModuleDescription : ApplicationModuleDescription, IDescriptionModuleDescription
     {
-        public List<string> Assets { get; set; } = new List<string>();
-
-        IReadOnlyList<string> IDescriptionModuleDescription.Assets { get { return Assets; } }
     }
 }
