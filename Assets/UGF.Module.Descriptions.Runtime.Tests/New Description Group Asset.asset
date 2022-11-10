@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4f9450a948498a8c2e77822798d885, type: 3}
   m_Name: New Description Group Asset
   m_EditorClassIdentifier: 
-  m_descriptions: []
+  m_descriptions:
+  - m_key:
+      m_first: 4675955830162030254
+      m_second: 3654966563721544
+    m_value:
+      m_first: 4675955830162030254
+      m_second: 3654966563721544

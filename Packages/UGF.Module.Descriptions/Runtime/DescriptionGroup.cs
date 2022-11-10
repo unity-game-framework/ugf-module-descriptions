@@ -6,6 +6,6 @@ namespace UGF.Module.Descriptions.Runtime
 {
     public class DescriptionGroup : IDescription
     {
-        public Dictionary<GlobalId, IDescription> Descriptions { get; } = new Dictionary<GlobalId, IDescription>();
+        public Dictionary<GlobalId, GlobalId> Descriptions { get; } = new Dictionary<GlobalId, GlobalId>();
     }
 }

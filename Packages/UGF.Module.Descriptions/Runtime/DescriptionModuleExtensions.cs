@@ -33,7 +33,14 @@ namespace UGF.Module.Descriptions.Runtime
             if (descriptionModule == null) throw new ArgumentNullException(nameof(descriptionModule));
             if (!id.IsValid()) throw new ArgumentException("Value should be valid.", nameof(id));
 
-            return descriptionModule.Get<DescriptionGroup>(groupId).Descriptions.TryGetValue(id, out description);
+            if (descriptionModule.Get<DescriptionGroup>(groupId).Descriptions.TryGetValue(id, out GlobalId descriptionId))
+            {
+                description = descriptionModule.Get(descriptionId);
+                return true;
+            }
+
+            description = default;
+            return false;
         }
     }
 }
