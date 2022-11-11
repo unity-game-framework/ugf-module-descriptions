@@ -8,5 +8,7 @@ namespace UGF.Module.Descriptions.Runtime
     public class DescriptionModuleDescription : ApplicationModuleDescription, IDescriptionModuleDescription
     {
         public Dictionary<GlobalId, IDescription> Descriptions { get; } = new Dictionary<GlobalId, IDescription>();
+
+        IReadOnlyDictionary<GlobalId, IDescription> IDescriptionModuleDescription.Descriptions { get { return Descriptions; } }
     }
 }
