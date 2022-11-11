@@ -11,8 +11,10 @@ namespace UGF.Module.Descriptions.Runtime
     public class DescriptionGroupAsset : DescriptionAsset
     {
         [SerializeField] private List<Entry> m_descriptions = new List<Entry>();
+        [SerializeField] private List<DescriptionGroupAsset> m_groups = new List<DescriptionGroupAsset>();
 
         public List<Entry> Descriptions { get { return m_descriptions; } }
+        public List<DescriptionGroupAsset> Groups { get { return m_groups; } }
 
         [Serializable]
         public struct Entry
@@ -38,6 +40,19 @@ namespace UGF.Module.Descriptions.Runtime
                 if (!entry.Value.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Value));
 
                 description.Descriptions.Add(entry.Key, entry.Value);
+            }
+
+            for (int i = 0; i < m_groups.Count; i++)
+            {
+                DescriptionGroupAsset group = m_groups[i];
+
+                foreach (Entry entry in group.Descriptions)
+                {
+                    if (!entry.Key.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Key));
+                    if (!entry.Value.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Value));
+
+                    description.Descriptions.Add(entry.Key, entry.Value);
+                }
             }
 
             return description;
