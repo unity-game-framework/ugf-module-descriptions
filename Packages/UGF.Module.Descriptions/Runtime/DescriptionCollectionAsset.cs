@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UGF.Description.Runtime;
 using UGF.EditorTools.Runtime.Ids;
-using UnityEngine;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public abstract class DescriptionCollectionAsset : ScriptableObject
+    public abstract class DescriptionCollectionAsset : DescriptionAsset
     {
         public void GetDescriptions(IDictionary<GlobalId, IDescription> descriptions)
         {

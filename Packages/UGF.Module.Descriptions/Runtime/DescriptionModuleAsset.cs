@@ -9,10 +9,10 @@ namespace UGF.Module.Descriptions.Runtime
     public class DescriptionModuleAsset : ApplicationModuleAsset<DescriptionModule, DescriptionModuleDescription>
     {
         [SerializeField] private List<AssetIdReference<DescriptionAsset>> m_descriptions = new List<AssetIdReference<DescriptionAsset>>();
-        [SerializeField] private List<DescriptionCollectionAsset> m_collections = new List<DescriptionCollectionAsset>();
+        [SerializeField] private List<AssetIdReference<DescriptionCollectionAsset>> m_collections = new List<AssetIdReference<DescriptionCollectionAsset>>();
 
         public List<AssetIdReference<DescriptionAsset>> Descriptions { get { return m_descriptions; } }
-        public List<DescriptionCollectionAsset> Collections { get { return m_collections; } }
+        public List<AssetIdReference<DescriptionCollectionAsset>> Collections { get { return m_collections; } }
 
         protected override IApplicationModuleDescription OnBuildDescription()
         {
@@ -30,7 +30,11 @@ namespace UGF.Module.Descriptions.Runtime
 
             for (int i = 0; i < m_collections.Count; i++)
             {
-                m_collections[i].GetDescriptions(description.Descriptions);
+                AssetIdReference<DescriptionCollectionAsset> reference = m_collections[i];
+
+                description.Descriptions.Add(reference.Guid, reference.Asset.Build());
+
+                reference.Asset.GetDescriptions(description.Descriptions);
             }
 
             return description;
