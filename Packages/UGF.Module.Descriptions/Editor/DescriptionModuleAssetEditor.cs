@@ -11,8 +11,8 @@ namespace UGF.Module.Descriptions.Editor
     {
         private AssetIdReferenceListDrawer m_listDescriptions;
         private ReorderableListSelectionDrawerByPath m_listDescriptionsSelection;
-        private ReorderableListDrawer m_listCollections;
-        private ReorderableListSelectionDrawerByElement m_listCollectionsSelection;
+        private AssetIdReferenceListDrawer m_listCollections;
+        private ReorderableListSelectionDrawerByPath m_listCollectionsSelection;
 
         private void OnEnable()
         {
@@ -26,9 +26,9 @@ namespace UGF.Module.Descriptions.Editor
                 }
             };
 
-            m_listCollections = new ReorderableListDrawer(serializedObject.FindProperty("m_collections"));
+            m_listCollections = new AssetIdReferenceListDrawer(serializedObject.FindProperty("m_collections"));
 
-            m_listCollectionsSelection = new ReorderableListSelectionDrawerByElement(m_listCollections)
+            m_listCollectionsSelection = new ReorderableListSelectionDrawerByPath(m_listCollections, "m_asset")
             {
                 Drawer =
                 {

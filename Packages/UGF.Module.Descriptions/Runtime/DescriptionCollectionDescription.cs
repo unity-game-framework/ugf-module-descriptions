@@ -4,8 +4,8 @@ using UGF.EditorTools.Runtime.Ids;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public class DescriptionGroup : DescriptionBase
+    public class DescriptionCollectionDescription : DescriptionBase
     {
-        public Dictionary<GlobalId, GlobalId> Descriptions { get; } = new Dictionary<GlobalId, GlobalId>();
+        public List<GlobalId> DescriptionIds { get; } = new List<GlobalId>();
     }
 }
