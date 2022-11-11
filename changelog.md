@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-preview.1](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/1.0.0-preview.1) - 2022-11-11  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/8?closed=1)  
+    
+
+### Changed
+
+- Change description collection to description asset ([#18](https://github.com/unity-game-framework/ugf-module-descriptions/issues/18))  
+    - Add `DescriptionCollectionDescription` class as description of collection.
+    - Change `DescriptionCollectionAsset` class to inherit from the `DescriptionAsset` class.
+    - Change `DescriptionCollectionListAsset` class to build `DescriptionCollectionDescription` as description.
+
+### Fixed
+
+- Fix missing IDescriptionModuleDescription members ([#17](https://github.com/unity-game-framework/ugf-module-descriptions/issues/17))  
+    - Fix `IDescriptionModuleDescription.Descriptions` missing member.
+
 ## [1.0.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/1.0.0-preview) - 2022-11-10  
 
 ### Release Notes
