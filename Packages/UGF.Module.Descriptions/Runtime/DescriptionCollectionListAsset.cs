@@ -34,6 +34,11 @@ namespace UGF.Module.Descriptions.Runtime
                 AssetIdReference<DescriptionAsset> reference = m_descriptions[i];
 
                 descriptions.Add(reference.Guid, reference.Asset.Build());
+
+                if (reference.Asset is DescriptionCollectionAsset collection)
+                {
+                    collection.GetDescriptions(descriptions);
+                }
             }
         }
     }
