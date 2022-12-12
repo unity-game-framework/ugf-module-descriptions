@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0-preview.4](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/1.0.0-preview.4) - 2022-12-12  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/11?closed=1)  
+    
+
+### Added
+
+- Add list selection support id collections ([#25](https://github.com/unity-game-framework/ugf-module-descriptions/issues/25))  
+    - Update dependencies: `com.ugf.application` to `8.4.0` and `com.ugf.editortools` to `2.14.0` versions.
+    - Update package _Unity_ version to `2022.2`.
+    - Add `DescriptionGroupAsset` class to support selection preview in inspector.
+
 ## [1.0.0-preview.3](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/1.0.0-preview.3) - 2022-12-03  
 
 ### Release Notes

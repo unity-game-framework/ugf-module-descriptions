@@ -4,14 +4,14 @@ UGF.Module.Descriptions
 
 ## Information
 
-- **Version**: `1.0.0-preview.3`
-- **Unity**: `2022.1`
+- **Version**: `1.0.0-preview.4`
+- **Unity**: `2022.2`
 - **API Compatibility Level**: `.NET Standard 2.1`
 
 ### Dependencies
 
-- `com.ugf.application`: `8.3.1`
-- `com.ugf.editortools`: `2.13.0`
+- `com.ugf.application`: `8.4.0`
+- `com.ugf.editortools`: `2.14.0`
 
 
 ### Description
