@@ -18,10 +18,7 @@ namespace UGF.Module.Descriptions.Editor
 
             m_listDescriptionsSelection = new ReorderableListSelectionDrawerByPath(m_listDescriptions, "m_asset")
             {
-                Drawer =
-                {
-                    DisplayTitlebar = true
-                }
+                Drawer = { DisplayTitlebar = true }
             };
 
             m_listDescriptions.Enable();

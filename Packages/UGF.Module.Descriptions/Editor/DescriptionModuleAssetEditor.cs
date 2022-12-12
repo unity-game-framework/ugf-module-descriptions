@@ -20,20 +20,14 @@ namespace UGF.Module.Descriptions.Editor
 
             m_listDescriptionsSelection = new ReorderableListSelectionDrawerByPath(m_listDescriptions, "m_asset")
             {
-                Drawer =
-                {
-                    DisplayTitlebar = true
-                }
+                Drawer = { DisplayTitlebar = true }
             };
 
             m_listCollections = new AssetIdReferenceListDrawer(serializedObject.FindProperty("m_collections"));
 
             m_listCollectionsSelection = new ReorderableListSelectionDrawerByPath(m_listCollections, "m_asset")
             {
-                Drawer =
-                {
-                    DisplayTitlebar = true
-                }
+                Drawer = { DisplayTitlebar = true }
             };
 
             m_listDescriptions.Enable();
