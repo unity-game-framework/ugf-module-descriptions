@@ -28,9 +28,9 @@ namespace UGF.Module.Descriptions.Runtime
             public GlobalId Value { get { return m_value; } set { m_value = value; } }
         }
 
-        protected override IDescription OnBuild()
+        public void GetDescriptions(IDictionary<GlobalId, GlobalId> descriptions)
         {
-            var description = new DescriptionGroup();
+            if (descriptions == null) throw new ArgumentNullException(nameof(descriptions));
 
             for (int i = 0; i < m_descriptions.Count; i++)
             {
@@ -39,21 +39,22 @@ namespace UGF.Module.Descriptions.Runtime
                 if (!entry.Key.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Key));
                 if (!entry.Value.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Value));
 
-                description.Descriptions.Add(entry.Key, entry.Value);
+                descriptions.Add(entry.Key, entry.Value);
             }
 
             for (int i = 0; i < m_groups.Count; i++)
             {
                 DescriptionGroupAsset group = m_groups[i];
 
-                foreach (Entry entry in group.Descriptions)
-                {
-                    if (!entry.Key.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Key));
-                    if (!entry.Value.IsValid()) throw new ArgumentException("Value should be valid.", nameof(entry.Value));
-
-                    description.Descriptions.Add(entry.Key, entry.Value);
-                }
+                group.GetDescriptions(descriptions);
             }
+        }
+
+        protected override IDescription OnBuild()
+        {
+            var description = new DescriptionGroup();
+
+            GetDescriptions(description.Descriptions);
 
             return description;
         }
