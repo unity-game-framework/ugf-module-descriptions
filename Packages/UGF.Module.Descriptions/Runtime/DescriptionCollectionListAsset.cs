@@ -16,16 +16,16 @@ namespace UGF.Module.Descriptions.Runtime
 
         protected override IDescription OnBuild()
         {
-            var description = new DescriptionCollectionDescription();
+            var descriptions = new List<GlobalId>();
 
             for (int i = 0; i < m_descriptions.Count; i++)
             {
                 AssetIdReference<DescriptionAsset> reference = m_descriptions[i];
 
-                description.DescriptionIds.Add(reference.Guid);
+                descriptions.Add(reference.Guid);
             }
 
-            return description;
+            return new DescriptionCollectionDescription(descriptions);
         }
 
         protected override void OnGetDescriptions(IDictionary<GlobalId, IDescription> descriptions)
