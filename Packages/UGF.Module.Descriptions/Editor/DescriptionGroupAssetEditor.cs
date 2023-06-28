@@ -8,7 +8,7 @@ namespace UGF.Module.Descriptions.Editor
     [CustomEditor(typeof(DescriptionGroupAsset), true)]
     internal class DescriptionGroupAssetEditor : UnityEditor.Editor
     {
-        private ReorderableListKeyAndValueDrawer m_listDescriptions;
+        private DescriptionGroupDescriptionsListDrawer m_listDescriptions;
         private ReorderableListSelectionDrawerByPathGlobalId m_listDescriptionsSelectionKey;
         private ReorderableListSelectionDrawerByPathGlobalId m_listDescriptionsSelectionValue;
         private ReorderableListDrawer m_listGroups;
@@ -16,7 +16,7 @@ namespace UGF.Module.Descriptions.Editor
 
         private void OnEnable()
         {
-            m_listDescriptions = new ReorderableListKeyAndValueDrawer(serializedObject.FindProperty("m_descriptions"));
+            m_listDescriptions = new DescriptionGroupDescriptionsListDrawer(serializedObject.FindProperty("m_descriptions"));
 
             m_listDescriptionsSelectionKey = new ReorderableListSelectionDrawerByPathGlobalId(m_listDescriptions, "m_key")
             {
@@ -32,10 +32,7 @@ namespace UGF.Module.Descriptions.Editor
 
             m_listGroupsSelection = new ReorderableListSelectionDrawerByElement(m_listGroups)
             {
-                Drawer =
-                {
-                    DisplayTitlebar = true
-                }
+                Drawer = { DisplayTitlebar = true }
             };
 
             m_listDescriptions.Enable();
