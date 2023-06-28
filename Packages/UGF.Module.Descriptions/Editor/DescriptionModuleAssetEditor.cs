@@ -13,6 +13,8 @@ namespace UGF.Module.Descriptions.Editor
         private ReorderableListSelectionDrawerByPath m_listDescriptionsSelection;
         private AssetIdReferenceListDrawer m_listCollections;
         private ReorderableListSelectionDrawerByPath m_listCollectionsSelection;
+        private ReorderableListDrawer m_listLoadAsync;
+        private ReorderableListSelectionDrawerByElementGlobalId m_listLoadAsyncSelection;
 
         private void OnEnable()
         {
@@ -30,10 +32,22 @@ namespace UGF.Module.Descriptions.Editor
                 Drawer = { DisplayTitlebar = true }
             };
 
+            m_listLoadAsync = new ReorderableListDrawer(serializedObject.FindProperty("m_loadAsync"))
+            {
+                DisplayAsSingleLine = true
+            };
+
+            m_listLoadAsyncSelection = new ReorderableListSelectionDrawerByElementGlobalId(m_listLoadAsync)
+            {
+                Drawer = { DisplayTitlebar = true }
+            };
+
             m_listDescriptions.Enable();
             m_listDescriptionsSelection.Enable();
             m_listCollections.Enable();
             m_listCollectionsSelection.Enable();
+            m_listLoadAsync.Enable();
+            m_listLoadAsyncSelection.Enable();
         }
 
         private void OnDisable()
@@ -42,6 +56,8 @@ namespace UGF.Module.Descriptions.Editor
             m_listDescriptionsSelection.Enable();
             m_listCollections.Disable();
             m_listCollectionsSelection.Disable();
+            m_listLoadAsync.Disable();
+            m_listLoadAsyncSelection.Disable();
         }
 
         public override void OnInspectorGUI()
@@ -52,9 +68,11 @@ namespace UGF.Module.Descriptions.Editor
 
                 m_listDescriptions.DrawGUILayout();
                 m_listCollections.DrawGUILayout();
+                m_listLoadAsync.DrawGUILayout();
 
                 m_listDescriptionsSelection.DrawGUILayout();
                 m_listCollectionsSelection.DrawGUILayout();
+                m_listLoadAsyncSelection.DrawGUILayout();
             }
         }
     }
