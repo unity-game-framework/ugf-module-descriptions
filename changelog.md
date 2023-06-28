@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/2.0.0-preview) - 2023-06-28  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/14?closed=1)  
+    
+
+### Added
+
+- Add description asset loading ([#32](https://github.com/unity-game-framework/ugf-module-descriptions/issues/32))  
+    - Update dependencies: `com.ugf.application` to `8.5.0` and `com.ugf.editortools` to `2.17.0` versions, add `com.ugf.module.assets` of `5.1.0` version.
+    - Update package _Unity_ version to `2022.3`.
+    - Add `IDescriptionModule.LoadFromAssetsAsync()` method to load description data from assets.
+    - Add `IDescriptionModule.Provider` property as provider for description data.
+    - Add `DescriptionModuleDescription.LoadAsync` property as collection of description to load on initialize.
+    - Add `DescriptionCollectionAsset.GetDescriptions()` method to get descriptions into specified provider.
+    - Add `DescriptionGroupAsset.Descriptions` inspector property drag and drop adding support.
+    - Change `DescriptionCollectionDescription`, `DescriptionGroup` and `DescriptionModuleDescription` descriptions classes to read only.
+
 ## [1.0.0](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/1.0.0) - 2023-01-04  
 
 ### Release Notes
