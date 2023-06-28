@@ -7,5 +7,6 @@ namespace UGF.Module.Descriptions.Runtime
     public interface IDescriptionModuleDescription
     {
         IReadOnlyDictionary<GlobalId, IDescription> Descriptions { get; }
+        IReadOnlyList<GlobalId> LoadAsync { get; }
     }
 }
