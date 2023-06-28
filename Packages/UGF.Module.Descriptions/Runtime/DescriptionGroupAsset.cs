@@ -52,11 +52,11 @@ namespace UGF.Module.Descriptions.Runtime
 
         protected override IDescription OnBuild()
         {
-            var description = new DescriptionGroup();
+            var descriptions = new Dictionary<GlobalId, GlobalId>();
 
-            GetDescriptions(description.Descriptions);
+            GetDescriptions(descriptions);
 
-            return description;
+            return new DescriptionGroup(descriptions);
         }
     }
 }

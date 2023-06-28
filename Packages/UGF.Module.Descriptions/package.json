@@ -2,7 +2,7 @@
   "name": "com.ugf.module.descriptions",
   "displayName": "UGF.Module.Descriptions",
   "version": "1.0.0",
-  "unity": "2022.2",
+  "unity": "2022.3",
   "apiCompatibility": ".NET Standard 2.1",
   "description": "Module to manager description collections.",
   "author": {
@@ -19,7 +19,8 @@
     "registry": "https://unitygameframework.jfrog.io/artifactory/api/npm/default"
   },
   "dependencies": {
-    "com.ugf.application": "8.4.0",
-    "com.ugf.editortools": "2.15.0"
+    "com.ugf.application": "8.5.0",
+    "com.ugf.module.assets": "5.1.0",
+    "com.ugf.editortools": "2.17.0"
   }
 }
