@@ -50,7 +50,7 @@ namespace UGF.Module.Descriptions.Editor
 
                 if (!string.IsNullOrEmpty(directoryPath))
                 {
-                    collection.Add(path);
+                    collection.Add(directoryPath.Replace("\\", "/"));
                 }
             }
         }
