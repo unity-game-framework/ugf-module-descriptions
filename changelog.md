@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/2.1.0-preview) - 2023-11-13  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/15?closed=1)  
+    
+
+### Added
+
+- Add description collection from folder ([#35](https://github.com/unity-game-framework/ugf-module-descriptions/issues/35))  
+    - Update package _Unity_ version to `2023.1`.
+    - Update package registry to _UPM Hub_.
+    - Add `DescriptionFolderAsset` class as asset to define auto updated description collections linked to a folder with description assets inside.
+    - Add `DescriptionEditorSettings` class and project settings for `DescriptionFolderAsset` assets to be registered for auto or manual update.
+    - Add `DescriptionFolderEditorUtility` class to work with description folders.
+
 ## [2.0.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/2.0.0-preview) - 2023-06-28  
 
 ### Release Notes
