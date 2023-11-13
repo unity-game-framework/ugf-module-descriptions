@@ -27,7 +27,7 @@ namespace UGF.Module.Descriptions.Editor
                     {
                         if (!DescriptionFolderEditorUtility.TryUpdate(asset))
                         {
-                            Debug.LogWarning($"Description folder asset update failed: '{path}'.");
+                            Debug.LogWarning($"Description folder asset update failed: '{path}', asset has missing or invalid fields, or target collection inside the specified folder.");
                         }
                     }
                 }
