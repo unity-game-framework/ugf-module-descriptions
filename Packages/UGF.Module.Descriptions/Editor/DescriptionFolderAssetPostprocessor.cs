@@ -9,6 +9,7 @@ namespace UGF.Module.Descriptions.Editor
     internal class DescriptionFolderAssetPostprocessor : AssetPostprocessor
     {
         private static readonly HashSet<string> m_paths = new HashSet<string>();
+        private static readonly Dictionary<string, DescriptionFolderAsset> m_folders = new Dictionary<string, DescriptionFolderAsset>();
 
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
@@ -19,11 +20,11 @@ namespace UGF.Module.Descriptions.Editor
 
             if (m_paths.Count > 0)
             {
-                IReadOnlyDictionary<string, DescriptionFolderAsset> folders = DescriptionEditorSettings.GetFoldersGroupedByPath();
+                DescriptionFolderEditorUtility.GroupByFolderPath(m_folders, DescriptionEditorSettings.Settings.GetData().Folders);
 
                 foreach (string path in m_paths)
                 {
-                    if (folders.TryGetValue(path, out DescriptionFolderAsset asset))
+                    if (m_folders.TryGetValue(path, out DescriptionFolderAsset asset))
                     {
                         if (!DescriptionFolderEditorUtility.TryUpdate(asset))
                         {
@@ -33,6 +34,7 @@ namespace UGF.Module.Descriptions.Editor
                 }
 
                 m_paths.Clear();
+                m_folders.Clear();
 
                 AssetDatabase.SaveAssets();
             }

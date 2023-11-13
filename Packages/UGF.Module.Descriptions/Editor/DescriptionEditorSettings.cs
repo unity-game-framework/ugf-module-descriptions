@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UGF.CustomSettings.Editor;
+﻿using UGF.CustomSettings.Editor;
 using UnityEditor;
 
 namespace UGF.Module.Descriptions.Editor
@@ -11,8 +10,6 @@ namespace UGF.Module.Descriptions.Editor
             "UGF.Module.Descriptions",
             nameof(DescriptionEditorSettingsData)
         );
-
-        private static readonly Dictionary<string, DescriptionFolderAsset> m_groups = new Dictionary<string, DescriptionFolderAsset>();
 
         public static bool TryUpdateAll()
         {
@@ -30,17 +27,6 @@ namespace UGF.Module.Descriptions.Editor
             }
 
             return all;
-        }
-
-        public static IReadOnlyDictionary<string, DescriptionFolderAsset> GetFoldersGroupedByPath()
-        {
-            DescriptionEditorSettingsData data = Settings.GetData();
-
-            m_groups.Clear();
-
-            DescriptionFolderEditorUtility.GroupByFolderPath(m_groups, data.Folders);
-
-            return m_groups;
         }
 
         [SettingsProvider]
