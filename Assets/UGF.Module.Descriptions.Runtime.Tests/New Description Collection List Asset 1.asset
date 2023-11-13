@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a37192e18d0499ca17241680603b95d, type: 3}
+  m_Name: New Description Collection List Asset 1
+  m_EditorClassIdentifier: 
+  m_descriptions:
+  - m_guid:
+      m_first: 2518857887632302087
+      m_second: 15416516226185327706
+    m_asset: {fileID: 11400000, guid: 4003a007c7e722f45a74d2d7d377f2d5, type: 2}
+  - m_guid:
+      m_first: 316590593076999486
+      m_second: 7085704059892842538
+    m_asset: {fileID: 11400000, guid: 8f95b53ec17704642ac074014d7a5562, type: 2}
