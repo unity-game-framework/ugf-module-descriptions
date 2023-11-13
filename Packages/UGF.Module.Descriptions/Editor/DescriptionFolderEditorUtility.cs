@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using UGF.Module.Descriptions.Runtime;
 using UnityEditor;
 
@@ -15,7 +16,7 @@ namespace UGF.Module.Descriptions.Editor
         {
             if (asset == null) throw new ArgumentNullException(nameof(asset));
 
-            if (HasValidFolder(asset))
+            if (IsValid(asset))
             {
                 string folderPath = AssetDatabase.GetAssetPath(asset.Folder);
                 string[] guids = FindDescriptionsInFolder(folderPath);
@@ -47,15 +48,26 @@ namespace UGF.Module.Descriptions.Editor
             return guids;
         }
 
-        public static bool HasValidFolder(DescriptionFolderAsset asset)
+        public static bool IsValid(DescriptionFolderAsset asset)
         {
             if (asset == null) throw new ArgumentNullException(nameof(asset));
 
-            if (asset.Folder != null)
+            if (asset.Folder != null && asset.Collection != null)
             {
-                string path = AssetDatabase.GetAssetPath(asset.Folder);
+                string folderPath = AssetDatabase.GetAssetPath(asset.Folder);
 
-                return AssetDatabase.IsValidFolder(path);
+                if (AssetDatabase.IsValidFolder(folderPath))
+                {
+                    string collectionPath = AssetDatabase.GetAssetPath(asset.Collection);
+                    string collectionDirectory = Path.GetDirectoryName(collectionPath);
+
+                    if (!string.IsNullOrEmpty(collectionDirectory))
+                    {
+                        collectionDirectory = collectionDirectory.Replace('\\', '/');
+
+                        return collectionDirectory != folderPath;
+                    }
+                }
             }
 
             return false;
