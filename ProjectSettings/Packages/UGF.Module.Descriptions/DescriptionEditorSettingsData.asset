@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d89b033ad904ec5a129c721db9070b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_foldersAutoUpdate: 1
   m_folders:
   - {fileID: 11400000, guid: 34cf30279b1e53c4b823eea7b3ef1dc5, type: 2}
