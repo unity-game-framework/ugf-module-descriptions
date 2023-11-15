@@ -4,7 +4,7 @@ UGF.Module.Descriptions
 
 ## Information
 
-- **Version**: `2.1.0-preview`
+- **Version**: `2.1.0-preview.1`
 - **Unity**: `2023.1`
 - **API Compatibility Level**: `.NET Standard 2.1`
 
