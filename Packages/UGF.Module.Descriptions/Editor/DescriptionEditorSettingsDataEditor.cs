@@ -8,11 +8,14 @@ namespace UGF.Module.Descriptions.Editor
     [CustomEditor(typeof(DescriptionEditorSettingsData), true)]
     internal class DescriptionEditorSettingsDataEditor : UnityEditor.Editor
     {
+        private SerializedProperty m_propertyFoldersAutoUpdate;
         private ReorderableListDrawer m_foldersList;
         private ReorderableListSelectionDrawerByElement m_foldersListSelection;
 
         private void OnEnable()
         {
+            m_propertyFoldersAutoUpdate = serializedObject.FindProperty("m_foldersAutoUpdate");
+
             m_foldersList = new ReorderableListDrawer(serializedObject.FindProperty("m_folders"));
 
             m_foldersListSelection = new ReorderableListSelectionDrawerByElement(m_foldersList)
@@ -34,6 +37,8 @@ namespace UGF.Module.Descriptions.Editor
         {
             using (new SerializedObjectUpdateScope(serializedObject))
             {
+                EditorGUILayout.PropertyField(m_propertyFoldersAutoUpdate);
+
                 m_foldersList.DrawGUILayout();
             }
 
