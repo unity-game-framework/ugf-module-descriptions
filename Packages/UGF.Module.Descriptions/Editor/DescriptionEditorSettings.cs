@@ -11,7 +11,18 @@ namespace UGF.Module.Descriptions.Editor
             nameof(DescriptionEditorSettingsData)
         );
 
-        public static bool FoldersAutoUpdate { get { return Settings.GetData().FoldersAutoUpdate; } }
+        public static bool FoldersAutoUpdate
+        {
+            get { return Settings.GetData().FoldersAutoUpdate; }
+            set
+            {
+                DescriptionEditorSettingsData data = Settings.GetData();
+
+                data.FoldersAutoUpdate = value;
+
+                Settings.SaveSettings();
+            }
+        }
 
         public static bool TryUpdateAll()
         {
