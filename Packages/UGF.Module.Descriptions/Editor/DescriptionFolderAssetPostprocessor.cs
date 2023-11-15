@@ -13,30 +13,33 @@ namespace UGF.Module.Descriptions.Editor
 
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
-            GetDirectoryPaths(m_paths, importedAssets);
-            GetDirectoryPaths(m_paths, deletedAssets);
-            GetDirectoryPaths(m_paths, movedAssets);
-            GetDirectoryPaths(m_paths, movedFromAssetPaths);
-
-            if (m_paths.Count > 0)
+            if (DescriptionEditorSettings.FoldersAutoUpdate)
             {
-                DescriptionFolderEditorUtility.GroupByFolderPath(m_folders, DescriptionEditorSettings.Settings.GetData().Folders);
+                GetDirectoryPaths(m_paths, importedAssets);
+                GetDirectoryPaths(m_paths, deletedAssets);
+                GetDirectoryPaths(m_paths, movedAssets);
+                GetDirectoryPaths(m_paths, movedFromAssetPaths);
 
-                foreach (string path in m_paths)
+                if (m_paths.Count > 0)
                 {
-                    if (m_folders.TryGetValue(path, out DescriptionFolderAsset asset))
+                    DescriptionFolderEditorUtility.GroupByFolderPath(m_folders, DescriptionEditorSettings.Settings.GetData().Folders);
+
+                    foreach (string path in m_paths)
                     {
-                        if (!DescriptionFolderEditorUtility.TryUpdate(asset))
+                        if (m_folders.TryGetValue(path, out DescriptionFolderAsset asset))
                         {
-                            Debug.LogWarning($"Description folder asset update failed: '{path}', asset has missing or invalid fields, or target collection inside the specified folder.");
+                            if (!DescriptionFolderEditorUtility.TryUpdate(asset))
+                            {
+                                Debug.LogWarning($"Description folder asset update failed: '{path}', asset has missing or invalid fields, or target collection inside the specified folder.");
+                            }
                         }
                     }
+
+                    m_paths.Clear();
+                    m_folders.Clear();
+
+                    AssetDatabase.SaveAssets();
                 }
-
-                m_paths.Clear();
-                m_folders.Clear();
-
-                AssetDatabase.SaveAssets();
             }
         }
 
