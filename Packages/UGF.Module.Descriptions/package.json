@@ -1,7 +1,7 @@
 {
   "name": "com.ugf.module.descriptions",
   "displayName": "UGF.Module.Descriptions",
-  "version": "2.1.0-preview.1",
+  "version": "2.2.0-preview",
   "unity": "2023.2",
   "apiCompatibility": ".NET Standard 2.1",
   "description": "Module to manager description collections.",
