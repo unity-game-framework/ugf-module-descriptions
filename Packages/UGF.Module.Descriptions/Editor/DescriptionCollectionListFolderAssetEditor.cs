@@ -16,7 +16,12 @@ namespace UGF.Module.Descriptions.Editor
         {
             m_propertyFolder = serializedObject.FindProperty("m_folder");
             m_propertyCollection = serializedObject.FindProperty("m_collection");
-            m_drawerCollection = new EditorObjectReferenceDrawer(m_propertyCollection);
+
+            m_drawerCollection = new EditorObjectReferenceDrawer(m_propertyCollection)
+            {
+                Drawer = { DisplayTitlebar = true }
+            };
+
             m_drawerCollection.Enable();
         }
 
