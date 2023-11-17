@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d54b799a44d644719e1c7bc90430b399, type: 3}
-  m_Name: New Description Folder Asset
+  m_Script: {fileID: 11500000, guid: 112505bdf3874e418eaf6f66d1704cfb, type: 3}
+  m_Name: New Description Collection List Folder Asset
   m_EditorClassIdentifier: 
   m_folder: {fileID: 102900000, guid: 7b84226aada9ba0439521f91ceabc3e9, type: 3}
   m_collection: {fileID: 11400000, guid: 4128472707cb2344c8d8b89a436e3a0e, type: 2}
