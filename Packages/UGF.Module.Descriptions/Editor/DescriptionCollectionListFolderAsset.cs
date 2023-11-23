@@ -1,6 +1,6 @@
-﻿using UGF.EditorTools.Runtime.Assets;
+﻿using UGF.Assets.Editor;
+using UGF.EditorTools.Runtime.Assets;
 using UGF.EditorTools.Runtime.Ids;
-using UGF.Module.Assets.Editor;
 using UGF.Module.Descriptions.Runtime;
 using UnityEditor;
 using UnityEngine;
@@ -8,20 +8,11 @@ using UnityEngine;
 namespace UGF.Module.Descriptions.Editor
 {
     [CreateAssetMenu(menuName = "Unity Game Framework/Descriptions/Description Collection List Folder", order = 2000)]
-    public class DescriptionCollectionListFolderAsset : AssetFolderAsset<DescriptionAsset>
+    public class DescriptionCollectionListFolderAsset : AssetFolderAsset<DescriptionCollectionListAsset, DescriptionAsset>
     {
-        [SerializeField] private DescriptionCollectionListAsset m_collection;
-
-        public DescriptionCollectionListAsset Collection { get { return m_collection; } set { m_collection = value; } }
-
-        protected override bool OnIsValid()
-        {
-            return m_collection != null;
-        }
-
         protected override void OnUpdate()
         {
-            m_collection.Descriptions.Clear();
+            Collection.Descriptions.Clear();
 
             string[] guids = FindAssetsAsGuids();
 
@@ -33,10 +24,10 @@ namespace UGF.Module.Descriptions.Editor
                 var id = new GlobalId(guid);
                 var asset = AssetDatabase.LoadAssetAtPath<DescriptionAsset>(path);
 
-                m_collection.Descriptions.Add(new AssetIdReference<DescriptionAsset>(id, asset));
+                Collection.Descriptions.Add(new AssetIdReference<DescriptionAsset>(id, asset));
             }
 
-            EditorUtility.SetDirty(m_collection);
+            EditorUtility.SetDirty(Collection);
         }
     }
 }
