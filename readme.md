@@ -4,14 +4,13 @@ UGF.Module.Descriptions
 
 ## Information
 
-- **Version**: `2.2.0-preview`
+- **Version**: `2.2.0-preview.1`
 - **Unity**: `2023.2`
 - **API Compatibility Level**: `.NET Standard 2.1`
 
 ### Dependencies
 
-- `com.ugf.application`: `8.5.0`
-- `com.ugf.module.assets`: `6.0.0-preview`
+- `com.ugf.module.assets`: `6.0.0-preview.1`
 
 
 ### Description

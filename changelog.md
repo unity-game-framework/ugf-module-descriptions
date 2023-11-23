@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0-preview.1](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/2.2.0-preview.1) - 2023-11-23  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/18?closed=1)  
+    
+
+### Changed
+
+- Change to use UGF.Assets package ([#41](https://github.com/unity-game-framework/ugf-module-descriptions/issues/41))  
+    - Update dependencies: `com.ugf.module.assets` to `6.0.0-preview.1` version.
+
 ## [2.2.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/2.2.0-preview) - 2023-11-17  
 
 ### Release Notes
