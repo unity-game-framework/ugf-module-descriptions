@@ -11,7 +11,9 @@ namespace UGF.Module.Descriptions.Runtime
         public IReadOnlyDictionary<GlobalId, IDescription> Descriptions { get; }
         public IReadOnlyList<GlobalId> LoadAsync { get; }
 
-        public DescriptionModuleDescription(Type registerType, IReadOnlyDictionary<GlobalId, IDescription> descriptions, IReadOnlyList<GlobalId> loadAsync) : base(registerType)
+        public DescriptionModuleDescription(
+            IReadOnlyDictionary<GlobalId, IDescription> descriptions,
+            IReadOnlyList<GlobalId> loadAsync)
         {
             Descriptions = descriptions ?? throw new ArgumentNullException(nameof(descriptions));
             LoadAsync = loadAsync ?? throw new ArgumentNullException(nameof(loadAsync));

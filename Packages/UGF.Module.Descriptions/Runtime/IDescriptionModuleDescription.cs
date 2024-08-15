@@ -4,7 +4,7 @@ using UGF.EditorTools.Runtime.Ids;
 
 namespace UGF.Module.Descriptions.Runtime
 {
-    public interface IDescriptionModuleDescription
+    public interface IDescriptionModuleDescription : IDescription
     {
         IReadOnlyDictionary<GlobalId, IDescription> Descriptions { get; }
         IReadOnlyList<GlobalId> LoadAsync { get; }
