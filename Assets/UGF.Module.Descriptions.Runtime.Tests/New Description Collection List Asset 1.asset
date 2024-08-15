@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_descriptions:
   - m_guid:
-      m_first: 2518857887632302087
-      m_second: 15416516226185327706
+      serializedVersion: 2
+      Hash: 4003a007c7e722f45a74d2d7d377f2d5
     m_asset: {fileID: 11400000, guid: 4003a007c7e722f45a74d2d7d377f2d5, type: 2}
   - m_guid:
-      m_first: 316590593076999486
-      m_second: 7085704059892842538
+      serializedVersion: 2
+      Hash: 00000000000000000000000000000000
     m_asset: {fileID: 11400000, guid: 8f95b53ec17704642ac074014d7a5562, type: 2}
