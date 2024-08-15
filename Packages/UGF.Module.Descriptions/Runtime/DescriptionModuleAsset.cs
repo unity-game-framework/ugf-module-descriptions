@@ -13,15 +13,16 @@ namespace UGF.Module.Descriptions.Runtime
         [SerializeField] private List<AssetIdReference<DescriptionAsset>> m_descriptions = new List<AssetIdReference<DescriptionAsset>>();
         [SerializeField] private List<AssetIdReference<DescriptionCollectionAsset>> m_collections = new List<AssetIdReference<DescriptionCollectionAsset>>();
         [AssetId(typeof(DescriptionAsset))]
-        [SerializeField] private List<GlobalId> m_loadAsync = new List<GlobalId>();
+        [SerializeField] private List<Hash128> m_loadAsync = new List<Hash128>();
 
         public List<AssetIdReference<DescriptionAsset>> Descriptions { get { return m_descriptions; } }
         public List<AssetIdReference<DescriptionCollectionAsset>> Collections { get { return m_collections; } }
-        public List<GlobalId> LoadAsync { get { return m_loadAsync; } }
+        public List<Hash128> LoadAsync { get { return m_loadAsync; } }
 
-        protected override IApplicationModuleDescription OnBuildDescription()
+        protected override DescriptionModuleDescription OnBuildDescription()
         {
             var descriptions = new Dictionary<GlobalId, IDescription>();
+            var loadAsync = new GlobalId[m_loadAsync.Count];
 
             for (int i = 0; i < m_descriptions.Count; i++)
             {
@@ -39,7 +40,12 @@ namespace UGF.Module.Descriptions.Runtime
                 reference.Asset.GetDescriptions(descriptions);
             }
 
-            return new DescriptionModuleDescription(typeof(IDescriptionModule), descriptions, m_loadAsync.ToArray());
+            for (int i = 0; i < m_loadAsync.Count; i++)
+            {
+                loadAsync[i] = m_loadAsync[i];
+            }
+
+            return new DescriptionModuleDescription(descriptions, loadAsync);
         }
 
         protected override DescriptionModule OnBuild(DescriptionModuleDescription description, IApplication application)

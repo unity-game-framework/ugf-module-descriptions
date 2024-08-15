@@ -20,9 +20,9 @@ namespace UGF.Module.Descriptions.Runtime
         public struct Entry
         {
             [AssetId(typeof(DescriptionAsset))]
-            [SerializeField] private GlobalId m_key;
+            [SerializeField] private Hash128 m_key;
             [AssetId(typeof(DescriptionAsset))]
-            [SerializeField] private GlobalId m_value;
+            [SerializeField] private Hash128 m_value;
 
             public GlobalId Key { get { return m_key; } set { m_key = value; } }
             public GlobalId Value { get { return m_value; } set { m_value = value; } }

@@ -9,8 +9,8 @@ namespace UGF.Module.Descriptions.Runtime
 {
     public interface IDescriptionModule : IApplicationModule
     {
+        IDescriptionModuleDescription Description { get; }
         IProvider<GlobalId, IDescription> Provider { get; }
-        new IDescriptionModuleDescription Description { get; }
 
         T Get<T>(GlobalId id) where T : class, IDescription;
         IDescription Get(GlobalId id);
