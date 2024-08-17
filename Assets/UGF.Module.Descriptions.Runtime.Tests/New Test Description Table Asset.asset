@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6488be094f4b3883a16153d9dfbdb3, type: 3}
   m_Name: New Test Description Table Asset
   m_EditorClassIdentifier: 
-  m_tables:
-  - {fileID: 11400000, guid: dec3391db722f724ca0be1512a4dfefa, type: 2}
+  m_table:
+    m_entries:
+    - m_id:
+        serializedVersion: 2
+        Hash: de0c6d7c07f641b7a17bf0b6fb1fcf2c
+      m_name: Entry
+      m_value: 0
