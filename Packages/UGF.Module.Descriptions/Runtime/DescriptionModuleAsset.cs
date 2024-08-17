@@ -12,11 +12,13 @@ namespace UGF.Module.Descriptions.Runtime
     {
         [SerializeField] private List<AssetIdReference<DescriptionAsset>> m_descriptions = new List<AssetIdReference<DescriptionAsset>>();
         [SerializeField] private List<AssetIdReference<DescriptionCollectionAsset>> m_collections = new List<AssetIdReference<DescriptionCollectionAsset>>();
+        [SerializeField] private List<AssetIdReference<DescriptionTableAsset>> m_tables = new List<AssetIdReference<DescriptionTableAsset>>();
         [AssetId(typeof(DescriptionAsset))]
         [SerializeField] private List<Hash128> m_loadAsync = new List<Hash128>();
 
         public List<AssetIdReference<DescriptionAsset>> Descriptions { get { return m_descriptions; } }
         public List<AssetIdReference<DescriptionCollectionAsset>> Collections { get { return m_collections; } }
+        public List<AssetIdReference<DescriptionTableAsset>> Tables { get { return m_tables; } }
         public List<Hash128> LoadAsync { get { return m_loadAsync; } }
 
         protected override DescriptionModuleDescription OnBuildDescription()
@@ -38,6 +40,13 @@ namespace UGF.Module.Descriptions.Runtime
                 descriptions.Add(reference.Guid, reference.Asset.Build());
 
                 reference.Asset.GetDescriptions(descriptions);
+            }
+
+            for (int i = 0; i < m_tables.Count; i++)
+            {
+                AssetIdReference<DescriptionTableAsset> reference = m_tables[i];
+
+                descriptions.Add(reference.Guid, reference.Asset.Build());
             }
 
             for (int i = 0; i < m_loadAsync.Count; i++)

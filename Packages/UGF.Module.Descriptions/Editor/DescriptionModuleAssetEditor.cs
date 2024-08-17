@@ -13,6 +13,8 @@ namespace UGF.Module.Descriptions.Editor
         private ReorderableListSelectionDrawerByPath m_listDescriptionsSelection;
         private AssetIdReferenceListDrawer m_listCollections;
         private ReorderableListSelectionDrawerByPath m_listCollectionsSelection;
+        private AssetIdReferenceListDrawer m_listTables;
+        private ReorderableListSelectionDrawerByPath m_listTablesSelection;
         private ReorderableListDrawer m_listLoadAsync;
         private ReorderableListSelectionDrawerByElementGlobalId m_listLoadAsyncSelection;
 
@@ -32,6 +34,13 @@ namespace UGF.Module.Descriptions.Editor
                 Drawer = { DisplayTitlebar = true }
             };
 
+            m_listTables = new AssetIdReferenceListDrawer(serializedObject.FindProperty("m_tables"));
+
+            m_listTablesSelection = new ReorderableListSelectionDrawerByPath(m_listTables, "m_asset")
+            {
+                Drawer = { DisplayTitlebar = true }
+            };
+
             m_listLoadAsync = new ReorderableListDrawer(serializedObject.FindProperty("m_loadAsync"))
             {
                 DisplayAsSingleLine = true
@@ -46,6 +55,8 @@ namespace UGF.Module.Descriptions.Editor
             m_listDescriptionsSelection.Enable();
             m_listCollections.Enable();
             m_listCollectionsSelection.Enable();
+            m_listTables.Enable();
+            m_listTablesSelection.Enable();
             m_listLoadAsync.Enable();
             m_listLoadAsyncSelection.Enable();
         }
@@ -56,6 +67,8 @@ namespace UGF.Module.Descriptions.Editor
             m_listDescriptionsSelection.Enable();
             m_listCollections.Disable();
             m_listCollectionsSelection.Disable();
+            m_listTables.Disable();
+            m_listTablesSelection.Disable();
             m_listLoadAsync.Disable();
             m_listLoadAsyncSelection.Disable();
         }
@@ -68,10 +81,12 @@ namespace UGF.Module.Descriptions.Editor
 
                 m_listDescriptions.DrawGUILayout();
                 m_listCollections.DrawGUILayout();
+                m_listTables.DrawGUILayout();
                 m_listLoadAsync.DrawGUILayout();
 
                 m_listDescriptionsSelection.DrawGUILayout();
                 m_listCollectionsSelection.DrawGUILayout();
+                m_listTablesSelection.DrawGUILayout();
                 m_listLoadAsyncSelection.DrawGUILayout();
             }
         }
