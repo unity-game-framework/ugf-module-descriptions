@@ -1,6 +1,7 @@
 ﻿using UGF.EditorTools.Editor.IMGUI;
 using UGF.EditorTools.Editor.IMGUI.Scopes;
 using UGF.Module.Descriptions.Runtime;
+using UGF.Tables.Editor;
 using UnityEditor;
 
 namespace UGF.Module.Descriptions.Editor
@@ -8,26 +9,17 @@ namespace UGF.Module.Descriptions.Editor
     [CustomEditor(typeof(DescriptionTableAsset<,>), true)]
     internal class DescriptionTableAssetEditor : UnityEditor.Editor
     {
-        private ReorderableListDrawer m_listTables;
-        private ReorderableListSelectionDrawerByElement m_listTablesSelection;
+        private TableDrawer m_tableDrawer;
 
         private void OnEnable()
         {
-            m_listTables = new ReorderableListDrawer(serializedObject.FindProperty("m_tables"));
-
-            m_listTablesSelection = new ReorderableListSelectionDrawerByElement(m_listTables)
-            {
-                Drawer = { DisplayTitlebar = true }
-            };
-
-            m_listTables.Enable();
-            m_listTablesSelection.Enable();
+            m_tableDrawer = new TableDrawer(serializedObject.FindProperty("m_table"));
+            m_tableDrawer.Enable();
         }
 
         private void OnDisable()
         {
-            m_listTables.Disable();
-            m_listTablesSelection.Disable();
+            m_tableDrawer.Disable();
         }
 
         public override void OnInspectorGUI()
@@ -36,8 +28,7 @@ namespace UGF.Module.Descriptions.Editor
             {
                 EditorIMGUIUtility.DrawScriptProperty(serializedObject);
 
-                m_listTables.DrawGUILayout();
-                m_listTablesSelection.DrawGUILayout();
+                m_tableDrawer.DrawGUILayout();
             }
         }
     }
