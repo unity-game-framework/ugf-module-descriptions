@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-preview.1](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/3.0.0-preview.1) - 2024-08-17  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/20?closed=1)  
+    
+
+### Changed
+
+- Change description table ([#44](https://github.com/unity-game-framework/ugf-module-descriptions/issues/44))  
+    - Change `DescriptionTableAsset` and related classes to be define as single `TableAsset` instead of a collection.
+
 ## [3.0.0-preview](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/3.0.0-preview) - 2024-08-15  
 
 ### Release Notes
