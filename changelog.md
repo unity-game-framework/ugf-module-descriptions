@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0-preview.2](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/3.0.0-preview.2) - 2024-08-28  
+
+### Release Notes
+
+- [Milestone](https://github.com/unity-game-framework/ugf-module-descriptions/milestone/21?closed=1)  
+    
+
+### Added
+
+- Add loading from assets ([#46](https://github.com/unity-game-framework/ugf-module-descriptions/issues/46))  
+    - Add `IDescriptionModule.LoadAsync()` and `LoadTableAsync()` methods to load a description and a table.
+    - Remove `IDescriptionModule.LoadFromAssetsAsync()` method.
+
 ## [3.0.0-preview.1](https://github.com/unity-game-framework/ugf-module-descriptions/releases/tag/3.0.0-preview.1) - 2024-08-17  
 
 ### Release Notes
