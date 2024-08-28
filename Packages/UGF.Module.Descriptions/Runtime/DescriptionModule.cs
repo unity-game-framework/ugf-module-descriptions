@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
@@ -36,7 +35,13 @@ namespace UGF.Module.Descriptions.Runtime
         protected override async Task OnInitializeAsync()
         {
             await base.OnInitializeAsync();
-            await LoadFromAssetsAsync(Description.LoadAsync);
+
+            for (int i = 0; i < Description.LoadAsync.Count; i++)
+            {
+                GlobalId id = Description.LoadAsync[i];
+
+                await LoadAsync(id);
+            }
         }
 
         protected override void OnUninitialize()
@@ -75,25 +80,39 @@ namespace UGF.Module.Descriptions.Runtime
             return Provider.TryGet(id, out description);
         }
 
-        public async Task LoadFromAssetsAsync(IReadOnlyList<GlobalId> assetIds)
+        public async Task<IDescription> LoadAsync(GlobalId id)
         {
-            if (assetIds == null) throw new ArgumentNullException(nameof(assetIds));
+            if (!id.IsValid()) throw new ArgumentException("Value should be valid.", nameof(id));
 
-            for (int i = 0; i < assetIds.Count; i++)
+            var asset = await AssetModule.LoadAsync<DescriptionAsset>(id);
+
+            IDescription description = asset.Build();
+
+            Provider.Add(id, description);
+
+            if (asset is DescriptionCollectionListAsset collection)
             {
-                GlobalId assetId = assetIds[i];
-
-                var asset = await AssetModule.LoadAsync<DescriptionAsset>(assetId);
-
-                Provider.Add(assetId, asset.Build());
-
-                if (asset is DescriptionCollectionListAsset collection)
-                {
-                    collection.GetDescriptions(Provider);
-                }
-
-                await AssetModule.UnloadAsync(assetId, asset);
+                collection.GetDescriptions(Provider);
             }
+
+            await AssetModule.UnloadAsync(id, asset);
+
+            return description;
+        }
+
+        public async Task<IDescriptionTable> LoadTableAsync(GlobalId id)
+        {
+            if (!id.IsValid()) throw new ArgumentException("Value should be valid.", nameof(id));
+
+            var asset = await AssetModule.LoadAsync<DescriptionTableAsset>(id);
+
+            IDescriptionTable description = asset.Build();
+
+            Provider.Add(id, description);
+
+            await AssetModule.UnloadAsync(id, asset);
+
+            return description;
         }
     }
 }
