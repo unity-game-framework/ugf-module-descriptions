@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UGF.Application.Runtime;
 using UGF.Description.Runtime;
@@ -16,6 +15,7 @@ namespace UGF.Module.Descriptions.Runtime
         IDescription Get(GlobalId id);
         bool TryGet<T>(GlobalId id, out T description) where T : class, IDescription;
         bool TryGet(GlobalId id, out IDescription description);
-        Task LoadFromAssetsAsync(IReadOnlyList<GlobalId> assetIds);
+        Task<IDescription> LoadAsync(GlobalId id);
+        Task<IDescriptionTable> LoadTableAsync(GlobalId id);
     }
 }
